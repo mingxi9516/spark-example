@@ -65,7 +65,7 @@ object SparkLR {
 
     val spark = SparkSession
       .builder
-        .master("local[*]")
+      .master("local[*]")
       .appName("SparkLR")
       .getOrCreate()
 
