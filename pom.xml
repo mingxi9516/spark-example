@@ -17,9 +17,9 @@
         <java.version>1.8</java.version>
         <scala.version>2.11.8</scala.version>
         <scala.binary.version>2.11</scala.binary.version>
-        <spark.version>2.2.0.2.6.3.0-235</spark.version>
-        <hive.version>1.2.1000.2.6.3.0-235</hive.version>
-        <hadoop.version>2.7.3.2.6.3.0-235</hadoop.version>
+        <spark.version>2.2.0</spark.version>
+        <hive.version>1.2.1000</hive.version>
+        <hadoop.version>2.7.3</hadoop.version>
     </properties>
 
     <dependencies>
@@ -181,41 +181,4 @@
             <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
         </dependency>
     </dependencies>
-    <repositories>
-        <repository>
-            <id>public</id>
-            <name>Public Repositories</name>
-            <url>http://192.168.2.253:8081/nexus/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-    <!-- 插件配置 -->
-    <pluginRepositories>
-        <pluginRepository>
-            <id>public</id>
-            <name>Public Repositories</name>
-            <url>http://192.168.2.253:8081/nexus/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <url>http://192.168.2.253:8081/nexus/content/repositories/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <url>http://192.168.2.253:8081/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
