@@ -16,12 +16,11 @@ if __name__ == "__main__":
         .master("local[*]") \
         .enableHiveSupport() \
         .getOrCreate()
-    df = spark.sql("SELECT trim(phoneModel) phoneModel,"
-                   "cast(trim(longitude) as double) longitude,"
-                   "cast(trim(latitude) as double) latitude,"
-                   "timestamp(trim(currentTime)) currentTime "
-                   "FROM dc.dwd_user_gps_tmp "
-                   "WHERE phoneModel=865091024998281 AND cityCode=0755").toPandas
-
+    df = spark.sql("""SELECT trim(phoneModel) phoneModel,
+                   cast(trim(longitude) as double) longitude,
+                   cast(trim(latitude) as double) latitude,
+                   timestamp(trim(currentTime)) currentTime 
+                   FROM dc.dwd_user_gps_tmp 
+                   WHERE phoneModel=865091024998281 AND cityCode=0755""").toPandas
     plt.show()
     spark.stop()
