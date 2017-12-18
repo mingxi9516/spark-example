@@ -16,14 +16,23 @@ if __name__ == "__main__":
     spark = SparkSession \
         .builder \
         .master("local[*]") \
+        .enableHiveSupport() \
         .getOrCreate()
-    sparkDf = spark.read.format("csv") \
-        .option("header", "true") \
-        .load("data.txt")
-    pandasDf = sparkDf.toPandas()
-    lon=np.array(pandasDf['lon']).tolist()
-    lat=np.array(pandasDf['lat']).tolist()
-    timestamp=np.array(pandasDf['timestamp']).tolist()
+
+
+    # Displays the content of the DataFrame to stdout
+    pandasDf = spark.sql("""SELECT longitude,
+                   latitude,
+                   currentTime
+                   FROM dc.dwd_user_gps_tmp
+                   WHERE phoneModel="860191034777629" AND cityCode="610303" """).toPandas()
+    # sparkDf = spark.read.format("csv") \
+    #     .option("header", "true") \
+    #     .load("data.txt")
+    # pandasDf = sparkDf.toPandas()
+    lon=np.array(pandasDf['longitude']).tolist()
+    lat=np.array(pandasDf['latitude']).tolist()
+    timestamp=np.array(pandasDf['currentTime']).tolist()
     lon1=[]
     for la in lon:
         lon1.append(float(la.strip()))
@@ -33,12 +42,6 @@ if __name__ == "__main__":
     time1=[]
     for time in timestamp:
         time1.append(mpl.dates.date2num(datetime.strptime(time.strip(),'%Y-%m-%d %H:%M:%S')))
-    # Displays the content of the DataFrame to stdout
-    # df = spark.sql("""cast(trim(longitude) as double) longitude,
-    #                cast(trim(latitude) as double) latitude,
-    #                timestamp(trim(currentTime)) currentTime
-    #                FROM dc.dwd_user_gps_tmp
-    #                WHERE phoneModel=865091024998281 AND cityCode=0755""").toPandas
     mpl.rcParams['legend.fontsize'] = 10
     fig = plt.figure()
     ax = fig.gca(projection='3d')
