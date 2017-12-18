@@ -25,7 +25,7 @@ if __name__ == "__main__":
                    latitude,
                    currentTime
                    FROM dc.dwd_user_gps_tmp
-                   WHERE phoneModel="860191034777629" AND cityCode="610303" """).toPandas()
+                   WHERE phoneModel="860191034777629" AND cityCode="610303" AND workdate="20170521" """).toPandas()
     # sparkDf = spark.read.format("csv") \
     #     .option("header", "true") \
     #     .load("data.txt")
