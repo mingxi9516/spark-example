@@ -23,16 +23,16 @@ if __name__ == "__main__":
     # Displays the content of the DataFrame to stdout
     pandasDf = spark.sql("""SELECT longitude,
                    latitude,
-                   currentTime
-                   FROM dc.dwd_user_gps_tmp
-                   WHERE phoneModel="860191034777629" AND cityCode="610303" AND workdate="20170521" """).toPandas()
+                   currTime
+                   FROM app.dwd_user_gps_tmp
+                   WHERE phoneModel="A0000048334A6B" AND cityCode="130400" AND workDate="20180115" """).toPandas()
     # sparkDf = spark.read.format("csv") \
     #     .option("header", "true") \
     #     .load("data.txt")
     # pandasDf = sparkDf.toPandas()
     lon=np.array(pandasDf['longitude']).tolist()
     lat=np.array(pandasDf['latitude']).tolist()
-    timestamp=np.array(pandasDf['currentTime']).tolist()
+    timestamp=np.array(pandasDf['currTime']).tolist()
     lon1=[]
     for la in lon:
         lon1.append(float(la.strip()))
